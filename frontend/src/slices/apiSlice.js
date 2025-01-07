@@ -4,3 +4,6 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: ""}),
   endpoints: () => ({}),
 })
+
+
+// documentation in code splitting

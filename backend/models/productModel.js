@@ -22,6 +22,7 @@ const productSchema = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+      // userModel name define cheythu kodukka
       ref: "User",
     },
     name: {
