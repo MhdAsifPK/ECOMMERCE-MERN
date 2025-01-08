@@ -6,5 +6,5 @@ const Message = ({ varient, children }) => {
 Message.defaultProps = {
   varient: "info",
 };
-
+  
 export default Message;
