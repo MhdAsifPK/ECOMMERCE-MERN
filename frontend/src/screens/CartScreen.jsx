@@ -2,11 +2,19 @@ import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import Message from "../components/Message";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteToCart } from "../slices/cartSlice";
+
 
 const CartScreen = () => {
+  const dispatch = useDispatch();
+
   const { cartItem } = useSelector((state) => state.cart);
   console.log(cartItem);
+
+//   const deleteToCartHandler = (id) => {
+//     dispatch(deleteToCart(id));
+//   };
 
   return (
     <Row>
@@ -30,7 +38,11 @@ const CartScreen = () => {
                   <Col md={2}>${item.price}</Col>
 
                   <Col md={2}>
-                    <Button type="button" variant="light">
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={()=>dispatch(deleteToCart(item))}
+                    >
                       <FaTrash />
                     </Button>
                   </Col>
