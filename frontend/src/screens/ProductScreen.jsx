@@ -7,11 +7,8 @@ import {
   ListGroup,
   Row,
 } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
-import {
-  useGetProductQuery,
-  useGetProductsQuery,
-} from "../slices/productApiSlice";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useGetProductQuery } from "../slices/productApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 // import products from "../../products.js";
@@ -25,16 +22,21 @@ const ProductScreen = () => {
   // console.log(typeof id)
 
   // for storing qty state
-  const [qty, setQty] = useState();
+  const [qty, setQty] = useState(1);
 
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const { data: product, isLoading, error } = useGetProductQuery(id);
   console.log(product);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const addToCartHandler = () => {
-    dispatch(addToCart(product));
+    dispatch(addToCart({ ...product, qty }));
+    navigate("/cart");
+    console.log("first")
+  
   };
 
   // useEffect(() => {

@@ -3,8 +3,9 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "../components/Rating";
 
+
 const Product = ({ product }) => {
-  console.log(product);
+  // console.log(product);
 
   return (
     <Card className="my-3 p-3 rounded">
@@ -19,6 +20,7 @@ const Product = ({ product }) => {
           </Card.Title>
           <Card.Title as="div" className="product-title">
             <Rating value={product.rating}/>
+            
 
           </Card.Title>
         </Link>
