@@ -1,20 +1,30 @@
-import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  Image,
+  ListGroup,
+  Row,
+} from "react-bootstrap";
 import Message from "../components/Message";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteToCart } from "../slices/cartSlice";
-
+import { useState } from "react";
 
 const CartScreen = () => {
+  // const [qty, setQty] = useState(1);
+
   const dispatch = useDispatch();
 
   const { cartItem } = useSelector((state) => state.cart);
   console.log(cartItem);
 
-//   const deleteToCartHandler = (id) => {
-//     dispatch(deleteToCart(id));
-//   };
+  //   const deleteToCartHandler = (id) => {
+  //     dispatch(deleteToCart(id));
+  //   };
 
   return (
     <Row>
@@ -36,12 +46,36 @@ const CartScreen = () => {
                     <Link to={`/product/${item._id}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>${item.price}</Col>
+                  {/* {cartItem.countInStock > 0 && (
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Quantity:</Col>
+                        <Col>
+                          <Form.Control
+                            as="select"
+                            value={qty}
+                            onChange={(e) => setQty(e.target.value)}
+                          >
+                            {[...Array(cartItem.countInStock).keys()].map(
+                              (x) => {
+                                return (
+                                  <option key={x + 1} value={x + 1}>
+                                    {x + 1}
+                                  </option>
+                                );
+                              }
+                            )}
+                          </Form.Control>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  )} */}
 
                   <Col md={2}>
                     <Button
                       type="button"
                       variant="light"
-                      onClick={()=>dispatch(deleteToCart(item))}
+                      onClick={() => dispatch(deleteToCart(item))}
                     >
                       <FaTrash />
                     </Button>

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const { cartItem } = useSelector((state) => state.cart);
-  
+
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
