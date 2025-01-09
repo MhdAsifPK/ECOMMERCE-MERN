@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import asyncHandler from "../middlewares/asyncHandler.js";
 
 const createUser = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -15,7 +16,7 @@ const createUser = async (req, res, next) => {
     // password encrypting
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password, salt);
-
+// user alredy illel name email vacchu new user create aavum
     const user = await User.create({
       name,
       email,
@@ -40,13 +41,13 @@ const authUser = asyncHandler(async (req, res, next) => {
 
   if (user && (await user.matchPassword(password))) {
     // jwt token creation
-    let token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+    let token = jwt.sign({ userId: user._id }, "12345", {
       expiresIn: "1d",
     });
-
+// to store response in cookies
     res.cookie("jwt", token, {
       httpOnly: true, // after login jwt in stored in te frontends cookies as https only cookie , so request after login will be attactched with the jwt token stored in the cookies
-      secure: false,
+      secure: false, //after [rpduction make this true]
       sameSite: "strict", //privent csrf attack
       maxage: 60 * 60 * 1000, //1 day inn milliseconds
     });
