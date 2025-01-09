@@ -15,7 +15,7 @@ import { deleteToCart } from "../slices/cartSlice";
 import { useState } from "react";
 
 const CartScreen = () => {
-  // const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
 
@@ -46,17 +46,14 @@ const CartScreen = () => {
                     <Link to={`/product/${item._id}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>${item.price}</Col>
-                  {/* {cartItem.countInStock > 0 && (
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>Quantity:</Col>
+                  <Col>Quantity:</Col>
                         <Col>
                           <Form.Control
                             as="select"
                             value={qty}
                             onChange={(e) => setQty(e.target.value)}
                           >
-                            {[...Array(cartItem.countInStock).keys()].map(
+                            {[...Array(item.countInStock).keys()].map(
                               (x) => {
                                 return (
                                   <option key={x + 1} value={x + 1}>
@@ -67,9 +64,6 @@ const CartScreen = () => {
                             )}
                           </Form.Control>
                         </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  )} */}
 
                   <Col md={2}>
                     <Button

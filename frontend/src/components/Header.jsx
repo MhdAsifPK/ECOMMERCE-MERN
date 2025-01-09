@@ -26,7 +26,7 @@ const Header = () => {
                   {cartItem.reduce((acc, item) => acc + Number(item.qty), 0)}
                 </Badge>
               </Nav.Link>
-              <Nav.Link as={Link} to={"/login"}>
+              <Nav.Link as={Link} to={"/"}>
                 <FaUser /> Sign In
               </Nav.Link>
             </Nav>
