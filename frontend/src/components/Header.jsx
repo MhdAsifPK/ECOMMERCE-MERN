@@ -1,11 +1,18 @@
 import { Badge, Container, Nav, Navbar } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from "react-router-dom";
+import { logout } from "../slices/authSlice";
 
 const Header = () => {
   const { cartItem } = useSelector((state) => state.cart);
+  // logout function
+
+  const diapatch = useDispatch()
+  const logoutHndler = () => {
+    diapatch(logout())
+  }
 
   return (
     <header>
@@ -28,6 +35,11 @@ const Header = () => {
               </Nav.Link>
               <Nav.Link as={Link} to={"/"}>
                 <FaUser /> Sign In
+              </Nav.Link>
+              {/* logout */}
+              <Nav.Link as={Link} to={"/"}
+              onClick={logoutHndler}>
+                <FaUser /> LogOut
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
