@@ -1,7 +1,7 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import asyncHandler from "../middlewares/asyncHandler.js";
+import generateToken from "../utils/generateTokenFor.js";
 
 const createUser = asyncHandler(async (req, res, next) => {
   const { name, email, password } = req.body; //take the name,email,password from request body
@@ -36,15 +36,9 @@ const authUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user && (await user.matchPassword(password))) {
-    let token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: "1d",
-    });
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "strict", //prevent csrf attack
-      maxage: 60 * 60 * 1000, //1 day in millisecond
-    });
+  //  generate token
+  generateToken();
+
     res.status(200).json({
       _id: user._id,
       name: user.name,
