@@ -29,7 +29,7 @@ const cartSlice = createSlice({
     deleteToCart: (state, action) => {
       const item = action.payload;
       console.log(item);
-      state.cartItem = state.cartItem.filter((x) => x._id !== item._id);
+      state.cartItem = state.cartItem.filter((x) => x._id !== item);
       return UpdateCart(state)
     },
   },

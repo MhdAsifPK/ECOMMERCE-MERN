@@ -11,20 +11,24 @@ import Message from "../components/Message";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteToCart } from "../slices/cartSlice";
-import { useState } from "react";
+import { addToCart, deleteToCart } from "../slices/cartSlice";
+// import { useState } from "react";
 
 const CartScreen = () => {
-  const [qty, setQty] = useState(1);
+  // const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
 
   const { cartItem } = useSelector((state) => state.cart);
   console.log(cartItem);
 
-  //   const deleteToCartHandler = (id) => {
-  //     dispatch(deleteToCart(id));
-  //   };
+  const addToCartHandler = (product, qty) => {
+    dispatch(addToCart({ ...product, qty }));
+  };
+
+  const deleteToCartHandler = (id) => {
+    dispatch(deleteToCart(id));
+  };
 
   return (
     <Row>
@@ -46,30 +50,28 @@ const CartScreen = () => {
                     <Link to={`/product/${item._id}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>${item.price}</Col>
-                  <Col>Quantity:</Col>
-                        <Col>
-                          <Form.Control
-                            as="select"
-                            value={qty}
-                            onChange={(e) => setQty(e.target.value)}
-                          >
-                            {[...Array(item.countInStock).keys()].map(
-                              (x) => {
-                                return (
-                                  <option key={x + 1} value={x + 1}>
-                                    {x + 1}
-                                  </option>
-                                );
-                              }
-                            )}
-                          </Form.Control>
-                        </Col>
-
+                  <Col md={2}>
+                    <Form.Control
+                      as="select"
+                      value={item.qty}
+                      onChange={(e) =>
+                        addToCartHandler(item, Number(e.target.value))
+                      }
+                    >
+                      {[...Array(item.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Col>
                   <Col md={2}>
                     <Button
                       type="button"
                       variant="light"
-                      onClick={() => dispatch(deleteToCart(item))}
+                      onClick={() => {
+                        deleteToCartHandler(item._id);
+                      }}
                     >
                       <FaTrash />
                     </Button>
@@ -78,7 +80,7 @@ const CartScreen = () => {
               </ListGroup.Item>
             ))}
           </ListGroup>
-        )}
+        )}{" "}
       </Col>
       <Col md={4}>
         <Card>
