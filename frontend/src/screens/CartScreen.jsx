@@ -8,7 +8,7 @@ import {
   Row,
 } from "react-bootstrap";
 import Message from "../components/Message";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteToCart } from "../slices/cartSlice";
@@ -18,6 +18,7 @@ const CartScreen = () => {
   // const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const { cartItem } = useSelector((state) => state.cart);
   console.log(cartItem);
@@ -29,6 +30,10 @@ const CartScreen = () => {
   const deleteToCartHandler = (id) => {
     dispatch(deleteToCart(id));
   };
+
+  const checkOutHandler =()=>{
+    navigate('/login?redirect=/shipping')
+  }
 
   return (
     <Row>
@@ -100,6 +105,7 @@ const CartScreen = () => {
                 type="button"
                 className="btn-block"
                 disabled={cartItem.length === 0}
+                onClick={checkOutHandler}
               >
                 Proceed To Checkout
               </Button>
