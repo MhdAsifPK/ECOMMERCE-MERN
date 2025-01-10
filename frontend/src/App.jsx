@@ -12,6 +12,7 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
+import PrivateRote from "./components/PrivateRote";
 
 const App = () => {
   return (
@@ -26,8 +27,12 @@ const App = () => {
             <Route path="/" element={<HomeScreen />} />
             <Route path="/productinfo/:id" element={<ProductScreen />} />
             <Route path="/cart" element={<CartScreen />} />
-            <Route path="/shipping" element={<ShippingScreen />} />
-            <Route path="/payment" element={<PaymentScreen />} />
+
+            {/* private route serup */}
+            <Route path="" element={<PrivateRote />}>
+              <Route path="/shipping" element={<ShippingScreen />} />
+              <Route path="/payment" element={<PaymentScreen />} />
+            </Route>
           </Routes>
         </Container>
       </main>
