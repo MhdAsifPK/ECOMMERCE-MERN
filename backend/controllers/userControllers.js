@@ -21,6 +21,7 @@ const createUser = asyncHandler(async (req, res, next) => {
     password: encryptedPassowrd,
   });
   if (user) {
+    generateToken(res,user._id);
     res.status(200).json({
       _id: user._id,
       name: user.name,
@@ -37,7 +38,7 @@ const authUser = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email });
   if (user && (await user.matchPassword(password))) {
   //  generate token
-  generateToken();
+  generateToken(res,user._id);
 
     res.status(200).json({
       _id: user._id,
