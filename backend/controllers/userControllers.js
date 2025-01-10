@@ -36,7 +36,9 @@ const authUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user && (await user.matchPassword(password))) {
-    let token = jwt.sign({ userId: user._id },  process.env.JWT_SECRET_KEY, { expiresIn: "1d" });
+    let token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+      expiresIn: "1d",
+    });
     res.cookie("jwt", token, {
       httpOnly: true,
       secure: false,
@@ -54,9 +56,15 @@ const authUser = asyncHandler(async (req, res, next) => {
   }
 });
 // to store response in cookies
-  
 
-const logout = () => {};
+const logout = (req, res) => {
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expiresIn: new Date(0),
+  });
+
+  res.status(200).json({ message: "Logged Out Successfully" });
+};
 const getUserProfile = () => {};
 
-export { createUser, authUser , logout, getUserProfile };
+export { createUser, authUser, logout, getUserProfile };
