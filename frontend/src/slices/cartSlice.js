@@ -3,7 +3,11 @@ import { UpdateCart } from "../utils/cartUltils";
 // refresh cheyyumbo data pokaathirikkaan
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
-  : { cartItem: [] ,shippingAddress:{address:"",city:"",postalCode:"",country:""},paymentMethod:""};
+  : {
+      cartItem: [],
+      shippingAddress: { address: "", city: "", postalCode: "", country: "" },
+      paymentMethod: "",
+    };
 
 const cartSlice = createSlice({
   name: "cart",
@@ -37,10 +41,15 @@ const cartSlice = createSlice({
       state.shippingAddress = action.payload;
       localStorage.setItem("cart", JSON.stringify(state));
     },
-    
+    savePaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload;
+      localStorage.setItem("cart", JSON.stringify(state));
+
+    },
   },
 });
 
-export const { addToCart, deleteToCart, reserCart ,saveShippingAddress} = cartSlice.actions;
+export const { addToCart, deleteToCart, reserCart, saveShippingAddress ,savePaymentMethod} =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

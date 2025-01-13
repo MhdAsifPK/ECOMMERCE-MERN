@@ -1,10 +1,11 @@
+import asyncHandler from "../middlewares/asyncHandler.js";
 import Product from "../models/productModel.js";
 
-const getProduct = async (req, res) => {
+const getProduct = asyncHandler(async (req, res) => {
   const products = await Product.find();
   res.json(products);
   console.log("products");
-};
+});
 const createProduct = async (req, res) => {
   const {
     name,
