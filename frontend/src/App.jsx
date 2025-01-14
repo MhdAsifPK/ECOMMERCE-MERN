@@ -16,6 +16,11 @@ import PrivateRote from "./components/PrivateRote";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import { ToastContainer } from "react-toastify";
+import ProfileScreen from "./screens/ProfileScreen";
+import AdminRoutes from "./components/AdminRoutes";
+import ProductListScreen from "./screens/admin/ProductListScreen";
+import OrderListScreen from "./screens/admin/OrderListScreen";
+import UserListScreen from "./screens/admin/UserListScreen";
 
 const App = () => {
   return (
@@ -37,6 +42,14 @@ const App = () => {
               <Route path="/payment" element={<PaymentScreen />} />
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route path="/order/:id" element={<OrderScreen />} />
+              <Route path="/profile" element={<ProfileScreen />} />
+            </Route>
+
+            {/* admin */}
+            <Route path="/admin" element={<AdminRoutes />}>
+              <Route path="/admin/productlist" element={<ProductListScreen />} />
+              <Route path="/admin/orderlist" element={<OrderListScreen />} />
+              <Route path="/admin/userlist" element={<UserListScreen />} />
             </Route>
           </Routes>
         </Container>

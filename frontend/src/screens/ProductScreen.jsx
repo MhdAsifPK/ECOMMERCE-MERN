@@ -27,7 +27,7 @@ const ProductScreen = () => {
   const { id } = useParams();
   // console.log(id);
   const { data: product, isLoading, error } = useGetProductQuery(id);
-  console.log(product);
+  // console.log(product);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const ProductScreen = () => {
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
     navigate("/cart");
-    console.log("first")
+    // console.log("first")
   
   };
 

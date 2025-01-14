@@ -11,7 +11,7 @@ const Header = () => {
   const [logoutApiCall] = useLogoutUserMutation();
   const { cartItem } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(userInfo);
+  // console.log(userInfo);
   const navigate = useNavigate();
   // logout function
 
@@ -50,9 +50,9 @@ const Header = () => {
                   id="username"
                   style={{ margin: "" }}
                 >
-                  <Nav.Link as={Link} to="/profile">
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
-                  </Nav.Link>
+         
+                    <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
+         
                   <NavDropdown.Item onClick={logoutHndler}>
                     Logout
                   </NavDropdown.Item>
@@ -61,6 +61,14 @@ const Header = () => {
                 <Nav.Link as={Link} to={"/login"}>
                   <FaUser /> Sign In
                 </Nav.Link>
+              )}
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title="Admin" id="adminmenu">
+                  <NavDropdown.Item as={Link} to="/admin/productlist">Products</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/orderlist">Orders</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/userlist">Users</NavDropdown.Item>
+                  
+                </NavDropdown>
               )}
             </Nav>
           </Navbar.Collapse>

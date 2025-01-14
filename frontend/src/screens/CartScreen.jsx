@@ -21,7 +21,7 @@ const CartScreen = () => {
   const navigate = useNavigate()
 
   const { cartItem } = useSelector((state) => state.cart);
-  console.log(cartItem);
+  // console.log(cartItem);
 
   const addToCartHandler = (product, qty) => {
     dispatch(addToCart({ ...product, qty }));

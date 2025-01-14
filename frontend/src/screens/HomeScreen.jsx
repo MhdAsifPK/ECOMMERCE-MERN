@@ -7,7 +7,7 @@ import Loader from "../components/Loader.jsx";
 
 const HomeScreen = () => {
   const { data: products,isLoading,error } = useGetProductsQuery();
-  console.log(products)
+  // console.log(products)
   return (
     <>
  {isLoading ? (
