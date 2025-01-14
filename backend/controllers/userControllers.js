@@ -8,7 +8,7 @@ const createUser = asyncHandler(async (req, res, next) => {
   console.log(name,email,password)
 
   const userExists = await User.findOne({ email }); //checking is the user is already exists using findOne method
-  console.log(userExists)
+  // console.log(userExists)
   if (userExists) {
     res.status(400);
     throw new Error("User Already Exists");
