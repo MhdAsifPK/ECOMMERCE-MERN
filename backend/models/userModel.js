@@ -33,9 +33,9 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 
 // oro time password create aakkumbo e function avide exicute aavum(pre method use cheythond)
 userSchema.pre("save", async function (next) {
-  console.log("first")
+  // console.log("first")
   if (!this.isModified("password")) {
-    console.log("second")
+    // console.log("second")
     next();
   }
 

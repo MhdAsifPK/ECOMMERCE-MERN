@@ -66,8 +66,6 @@ const logout = (req, res) => {
   res.status(200).json({ message: "Logged Out Successfully" });
 };
 
-// ========================================================
-const getUserProfile = () => {};
 
 // =========================================================
 const updateUserProfile = asyncHandler(async (req, res) => {
@@ -93,4 +91,46 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { createUser, authUser, logout, getUserProfile, updateUserProfile };
+// ========================================================
+const getAllUserProfile = asyncHandler(async(req,res) => {
+  const users = await User.find()
+  res.json(users)
+  
+});
+// ==========================user edit for admnin
+const getUserProfile = asyncHandler(async(req,res) => {
+  const users = await User.findById(req.params.id)
+  res.json(users)
+  
+});
+// =======================================================
+
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findByIdAndDelete(req.params.id);
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error("user not found");
+  }
+});
+
+// ================================================================
+const updateUserProfileAdmin = asyncHandler(async (req, res) => {
+  const { name, email, isAdmin } = req.body;
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    user.name = name || user.name;
+    user.email = email || user.email;
+    user.isAdmin = isAdmin || user.isAdmin;
+
+    const updatedUser = await user.save();
+    res.json(updatedUser);
+  } else {
+    res.status(404);
+    throw new Error("User Not Found");
+  }
+});
+      
+export { createUser, authUser, logout, getAllUserProfile, updateUserProfile ,updateUserProfileAdmin,getUserProfile,deleteUser};
