@@ -8,7 +8,7 @@ import {
   Row,
 } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useGetProductQuery } from "../slices/productApiSlice";
+import { useCreateProductMutation, useGetProductQuery } from "../slices/productApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 // import products from "../../products.js";
@@ -58,7 +58,7 @@ const ProductScreen = () => {
           </Link>
           <Row>
             <Col md={5}>
-              <Image src={product?.image} alt={product?.name} fluid />
+              <Image src={`http://localhost:5000${product.image}`} alt={product?.name} fluid />
             </Col>
             <Col md={4}>
               <ListGroup variant="flush">

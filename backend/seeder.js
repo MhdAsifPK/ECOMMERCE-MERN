@@ -21,7 +21,7 @@ const importData = async ()=>{
             return {...product,user:createdUsers[0]._id} //id inect cheythhu
         })
         const createProducts = await Product.insertMany(sampleProducts)
-        console.log("data imported")
+        console.log(products)
         // for one tyme exucution
         process.exit()
     } catch (error) {
