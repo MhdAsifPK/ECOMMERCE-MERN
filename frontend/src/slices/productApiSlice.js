@@ -6,47 +6,60 @@ const productApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: "/api/products",
       }),
-      providesTags: ["Product"],
+      providesTags: ["Products"],
     }),
+    // =================================================product by id
     getProduct: build.query({
       query: (id) => ({
         url: `/api/products/${id}`,
       }),
       providesTags: ["Product"],
     }),
+    // =================================================
     createProduct: build.mutation({
       query: (product) => ({
         url: "/api/products",
         method: "POST",
         body: product,
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["Products"],
     }),
+    // =================================================
     updateProduct: build.mutation({
       query: (data) => ({
         url: `/api/products/${data.id}`,
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["Products","Product"],
     }),
-
+    // =================================================
     uploadProducImage: build.mutation({
       query: (data) => ({
         url: `/api/uploads`,
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Products", "Product"],
+      invalidatesTags: [ "Product"],
     }),
-
+    // =================================================
     deleteProduct: build.mutation({
       query: (id) => ({
         url: `/api/products/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Products"],
+      invalidatesTags: ["Products","Product"],
     }),
+    // =================================================
+    createProductReview: build.mutation({
+      query: (data) => ({
+        url: `/api/products/${data.id}/review`,
+        method: "POST",
+        body: data,
+        }),
+        invalidatesTags: ["Product"],
+        }),
+
   }),
 });
 export const {
@@ -56,4 +69,5 @@ export const {
   useUpdateProductMutation,
   useUploadProducImageMutation,
   useDeleteProductMutation,
+  useCreateProductReviewMutation,
 } = productApiSlice;

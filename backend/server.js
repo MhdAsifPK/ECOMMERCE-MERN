@@ -8,6 +8,8 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import path from 'path'
+
+
 dotenv.config();
 
 connectDb();
@@ -30,7 +32,7 @@ app.use("/api/uploads", uploadRoutes);
 
 // for get current project path 
 const __dirname =path.resolve()
-// for get public folder path
+// for get public folder path(for serving).static middlware use cheyyanth static file ne publlic aakkan)
 app.use("/uploads",express.static(path.join(__dirname,"/uploads")))
 
 
