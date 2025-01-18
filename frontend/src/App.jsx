@@ -39,6 +39,8 @@ const App = () => {
             <Route path="/page/:pageNumber" element={<HomeScreen />} />
             {/* for search */}
             <Route path="/search/:keyword" element={<HomeScreen />} />
+            {/* search cheyyanthum page number um backend kk send aakkan */}
+            <Route path="/search/:keyword/page/:pageNumber" element={<HomeScreen />} />
             <Route path="/productinfo/:id" element={<ProductScreen />} />
             <Route path="/cart" element={<CartScreen />} />
 
