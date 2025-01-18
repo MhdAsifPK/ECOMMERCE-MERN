@@ -2,8 +2,23 @@ import asyncHandler from "../middlewares/asyncHandler.js";
 import Product from "../models/productModel.js";
 
 const getProduct = asyncHandler(async (req, res) => {
-  const products = await Product.find();
-  res.json(products);
+  // hpow many product scrreen in the display
+  const pageSize = 1;
+  const page = Number(req.query.pageNumber || 1);
+
+  // for ssearch
+  const keywordConditon= req.query.keyword ? {name:{$regex:req.query.keyword, $options:"i"}}:{};
+  // product collection n  akatth ethra count undennu ariyaan
+  const count = await Product.countDocuments({...keywordConditon});
+
+  // for limiting screen display at a time screen dispaly
+
+  const products = await Product.find({...keywordConditon})
+    .limit(pageSize)
+    // skip used for skipping products and screen the next product on the screen
+    .skip(pageSize * (page - 1));
+// total eathra page varunnundennu frontent kk ayakkan
+  res.json({products,page,pages:Math.ceil(count/pageSize)});
   console.log("products");
 });
 // ==============================================================

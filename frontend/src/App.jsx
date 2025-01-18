@@ -35,6 +35,10 @@ const App = () => {
             <Route path="/register" element={<RegisterScreen />} />
 
             <Route path="/" element={<HomeScreen />} />
+
+            <Route path="/page/:pageNumber" element={<HomeScreen />} />
+            {/* for search */}
+            <Route path="/search/:keyword" element={<HomeScreen />} />
             <Route path="/productinfo/:id" element={<ProductScreen />} />
             <Route path="/cart" element={<CartScreen />} />
 

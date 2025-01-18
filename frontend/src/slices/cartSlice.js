@@ -50,11 +50,15 @@ const cartSlice = createSlice({
       return UpdateCart(state);
       // localStorage.setItem("cart", JSON.stringify(state));
 
-    }
+    },
+    savePaymentResult: (state, action) => {
+      state.paymentResult = action.payload;
+      localStorage.setItem("cart", JSON.stringify(state));
+    },
   },
 });
 
-export const { addToCart, deleteToCart, reserCart, saveShippingAddress ,savePaymentMethod,clearCartItems} =
+export const { addToCart, deleteToCart, reserCart, saveShippingAddress ,savePaymentMethod,clearCartItems,savePaymentResult} =
   cartSlice.actions;
 
 export default cartSlice.reducer;

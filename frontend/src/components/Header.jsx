@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../slices/authSlice";
 import { reserCart } from "../slices/cartSlice";
 import { useLogoutUserMutation } from "../slices/authApiSlice";
+import SearchBox from "./SearchBox";
 
 const Header = () => {
   const [logoutApiCall] = useLogoutUserMutation();
@@ -38,6 +39,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+              <SearchBox/>
               <Nav.Link as={Link} to={"/cart"}>
                 <FaShoppingCart /> Cart
                 <Badge pill bg="sucess" style={{ marginLeft: "5px" }}>
